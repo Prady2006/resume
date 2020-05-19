@@ -52,7 +52,7 @@ nav {
 
 #name-social-container {
     /* margin-top: 20vh; */
-    padding-bottom: 50%;
+    padding-bottom: 30%;
 }
 #my-name {
     color: whitesmoke;
@@ -71,7 +71,7 @@ nav {
 }
 
 .social-icons li a i:hover {
-    /* border: 2px black solid; */
+   
     border-bottom: 0px;
     box-shadow: 0px 0px 6px 4px rgba(230,196,196,0.3);
 }
@@ -291,19 +291,73 @@ address span {
     display: none;
 }
 
+ /* HAMBURGER ICON  */
+.hamburger {
+    display: none;
+}
+#lightbox {
+    overflow: hidden;
+    height: 0;
+    width: 0;
+}
 @media (max-width: 600px){
     .skills-display {
         width: 100%;
     }
+    
+    .horizontal-list {
+        display: none;
+    }
+    .hamburger {
+        display: inline-block;
+        font-size: 2rem;
+        position: absolute;
+        right:1.5rem;
+        top:2rem;
+        background-color:transparent;
+        /* color: white !important; */
+        margin: 1rem;
+    }
+    .hamburger a {
+        line-height: 0px;
+    }
+    .hamburger a i {
+        color: white;
+    }
     .timeline {
         width: 100%;
     }
-    #name-social-container {
-        margin-top: 3vh;
+    #lightbox:target {
+        position: absolute;
+        display: flex;
+        top:0.3rem;
+        right: 2rem;
+        /* top:4.5rem; */
+        height: auto;
+        width: 25vw;
+        background-color:#1e2125 ;
+        overflow: auto;
+        z-index: 9999;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.459);
     }
+
+    #lightbox:target > div {
+        flex:1;
+        /* text-decoration: none; */
+        margin:3px;
+    }
+    #lightbox:target div a {
+        text-decoration: none;
+        color:white
+    }
+
+
     .slider{
         left: 2px;
-        top: 6rem;
+        top: 10rem;
     }
     .vertical-list {
         padding-left: 4px;
@@ -317,6 +371,18 @@ address span {
         padding-right: 5%;
         text-align: justify;
     }
+    #my-name {
+        margin-top:0px;
+        font-size: 1.5em;
+    }
+    #name-social-container {
+        padding-bottom: 10rem;
+        padding-top: 8rem;
+    }
+    /* #my-image {
+        width:30%;
+        height: 30%;
+    } */
     #experience {
         height: auto;
     }
