@@ -11,8 +11,9 @@ var scrollevent = setInterval(function(id) {
     window.scrollBy(0,50);
     currentPos += 50;
 },50);
+
 for (let i = 0 ; i < a.length ; i++ ){
-    a[i].addEventListener('click',scrollevent(this.getAttribute('href').split('#')[1]));
+    a[i].addEventListener('click',scrollevent(a[i].getAttribute('href').split('#')[1]));
 }
 
 var i = 1 ;
