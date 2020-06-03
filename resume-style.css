@@ -149,7 +149,7 @@ section:nth-child(2n+1) {
 }
 .eighty-five-percent {
     background-color: lightpink;
-    width: 85%;
+    /* width: 0%; */
     padding-left: 2px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -162,7 +162,7 @@ section:nth-child(2n+1) {
 .skill-name span {
     font-size: 1rem;
     padding: 3px;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
 }
 
 #contact  { 

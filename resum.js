@@ -44,3 +44,28 @@ function scrolldown(targetSection){
     window.scrollBy(0,50);
     console.log(targetSectionCoordinates.top);
 }
+
+// For autofilling skills section 
+var progressBars = document.querySelectorAll('.skill-progress > div');
+var skillsContainer = document.getElementById('skills-container');
+for(let i = 0 ; i < progressBars.length ; i++){
+    progressBars[i].style.width = 0;
+}
+window.addEventListener('scroll',scrollCheck);
+
+function scrollCheck(){
+    var coordinates = skillsContainer.getBoundingClientRect();
+    if (coordinates.top < window.innerHeight){
+        var animation = setInterval(function(){
+            for (let i = 0 ; i < progressBars.length ; i++){
+                if( progressBars[i].style.width <= progressBars[i].getAttribute('data-skillValue') ){
+                    
+                    progressBars[i].style.width = parseInt(progressBars[i].style.width) + 1 + "%";
+                
+                }
+
+                // console.log(progressBars[i].style.width);
+            }
+        },1000);
+    }
+}
