@@ -55,13 +55,15 @@ window.addEventListener('scroll',scrollCheck);
 var animation ;
 function scrollCheck(){
     var coordinates = skillsContainer.getBoundingClientRect();
+    
+
     if (coordinates.top < window.innerHeight){
         animation = setInterval(function(){
             for (let i = 0 ; i < progressBars.length ; i++){
                 if( parseInt(progressBars[i].style.width) <= parseInt(progressBars[i].getAttribute('data-skillValue') ) ){
                     
                     progressBars[i].style.width = parseInt(progressBars[i].style.width) + 1 + "%";
-                    console.log(progressBars[i].style.width);
+                    // console.log(progressBars[i].style.width);
                     
                 }
 
@@ -69,6 +71,12 @@ function scrollCheck(){
             }
         },1000);
     }
-    // clearInterval(animation);
-    
+
+    if (coordinates.top > window.innerHeight){
+        clearInterval(animation);
+        // console.log("clearInterval");
+        for(let i = 0 ; i < progressBars.length ; i++){
+            progressBars[i].style.width = '0' ;
+        }
+    }
 }
