@@ -37,7 +37,7 @@ for (var i = 0 ; i < a.length ; i++){
 function scrolldown(targetSection){
     var targetSectionCoordinates = targetSection.getBoundingClientRect();
     // console.log(targetSectionCoordinates);   
-    if(targetSectionCoordinates.top <= 0 ){
+    if(targetSectionCoordinates.top < 0 ){
         clearInterval(interval);
         return;
     }
@@ -52,20 +52,23 @@ for(let i = 0 ; i < progressBars.length ; i++){
     progressBars[i].style.width = 0;
 }
 window.addEventListener('scroll',scrollCheck);
-
+var animation ;
 function scrollCheck(){
     var coordinates = skillsContainer.getBoundingClientRect();
     if (coordinates.top < window.innerHeight){
-        var animation = setInterval(function(){
+        animation = setInterval(function(){
             for (let i = 0 ; i < progressBars.length ; i++){
-                if( progressBars[i].style.width <= progressBars[i].getAttribute('data-skillValue') ){
+                if( parseInt(progressBars[i].style.width) <= parseInt(progressBars[i].getAttribute('data-skillValue') ) ){
                     
                     progressBars[i].style.width = parseInt(progressBars[i].style.width) + 1 + "%";
-                
+                    console.log(progressBars[i].style.width);
+                    
                 }
 
                 // console.log(progressBars[i].style.width);
             }
         },1000);
     }
+    // clearInterval(animation);
+    
 }
