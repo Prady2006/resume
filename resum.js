@@ -46,37 +46,78 @@ function scrolldown(targetSection){
 }
 
 // For autofilling skills section 
+    // var progressBars = document.querySelectorAll('.skill-progress > div');
+    // var skillsContainer = document.getElementById('skills-container');
+    // for(let i = 0 ; i < progressBars.length ; i++){
+    //     progressBars[i].style.width = 0;
+    // }
+    // window.addEventListener('scroll',scrollCheck);
+    // var animation ;
+    // function scrollCheck(){
+    //     var coordinates = skillsContainer.getBoundingClientRect();
+        
+
+    //     if (coordinates.top < window.innerHeight){
+    //         animation = setInterval(function(){
+    //             for (let i = 0 ; i < progressBars.length ; i++){
+    //                 if( parseInt(progressBars[i].style.width) <= parseInt(progressBars[i].getAttribute('data-skillValue') ) ){
+                        
+    //                     progressBars[i].style.width = parseInt(progressBars[i].style.width) + 1 + "%";
+    //                     // console.log(progressBars[i].style.width);
+                        
+    //                 }
+
+    //                 // console.log(progressBars[i].style.width);
+    //             }
+    //         },1000);
+    //     }
+
+    //     if (coordinates.top > window.innerHeight){
+    //         clearInterval(animation);
+    //         // console.log("clearInterval");
+    //         for(let i = 0 ; i < progressBars.length ; i++){
+    //             progressBars[i].style.width = '0' ;
+    //         }
+    //     }
+    // }
+
 var progressBars = document.querySelectorAll('.skill-progress > div');
 var skillsContainer = document.getElementById('skills-container');
-for(let i = 0 ; i < progressBars.length ; i++){
-    progressBars[i].style.width = 0;
-}
-window.addEventListener('scroll',scrollCheck);
-var animation ;
-function scrollCheck(){
-    var coordinates = skillsContainer.getBoundingClientRect();
-    
-
-    if (coordinates.top < window.innerHeight){
-        animation = setInterval(function(){
-            for (let i = 0 ; i < progressBars.length ; i++){
-                if( parseInt(progressBars[i].style.width) <= parseInt(progressBars[i].getAttribute('data-skillValue') ) ){
-                    
-                    progressBars[i].style.width = parseInt(progressBars[i].style.width) + 1 + "%";
-                    // console.log(progressBars[i].style.width);
-                    
-                }
-
-                // console.log(progressBars[i].style.width);
-            }
-        },1000);
+window.addEventListener('scroll',checkScroll);
+var animationDone  = false; 
+initializeBars();
+function initializeBars(){
+    for (let bar of progressBars){
+        bar.style.width = 0 + '%';
     }
+}
 
-    if (coordinates.top > window.innerHeight){
-        clearInterval(animation);
-        // console.log("clearInterval");
-        for(let i = 0 ; i < progressBars.length ; i++){
-            progressBars[i].style.width = '0' ;
-        }
+function fillBar() {
+    for (let bar of progressBars){
+        let targetWidth = bar.getAttribute('data-skillValue');
+        console.log(targetWidth);
+        let currentWidth = 0 ; 
+        let interval = setInterval(function(){
+            console.log(currentWidth);
+            if(currentWidth > targetWidth){
+                clearInterval(interval);
+                console.log("clearinterval");
+                return;
+            }
+            currentWidth++;
+            bar.style.width = currentWidth + '%';
+            console.log("bar.style.width = " , bar.style.width);
+        },50);
+    }
+}
+
+function checkScroll(){
+    var coordinates = skillsContainer.getBoundingClientRect();
+    if(!animationDone && coordinates.top < window.innerHeight){
+        animationDone = true;
+        fillBar();
+    }else if ( coordinates.top > window.innerHeight){
+        animationDone = false;
+        initializeBars();
     }
 }
