@@ -95,10 +95,8 @@ function initializeBars(){
 function fillBar() {
     for (let bar of progressBars){
         let targetWidth = bar.getAttribute('data-skillValue');
-        console.log(targetWidth);
         let currentWidth = 0 ; 
         let interval = setInterval(function(){
-            console.log(currentWidth);
             if(currentWidth > targetWidth){
                 clearInterval(interval);
                 console.log("clearinterval");
@@ -106,11 +104,12 @@ function fillBar() {
             }
             currentWidth++;
             bar.style.width = currentWidth + '%';
-            console.log("bar.style.width = " , bar.style.width);
         },50);
     }
 }
-
+// function fillBar(bar){
+//     let currentWidth = 
+// }
 function checkScroll(){
     var coordinates = skillsContainer.getBoundingClientRect();
     if(!animationDone && coordinates.top < window.innerHeight){
@@ -120,4 +119,5 @@ function checkScroll(){
         animationDone = false;
         initializeBars();
     }
+    
 }
