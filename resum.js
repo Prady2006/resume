@@ -92,32 +92,53 @@ function initializeBars(){
     }
 }
 
-function fillBar() {
-    for (let bar of progressBars){
-        let targetWidth = bar.getAttribute('data-skillValue');
-        let currentWidth = 0 ; 
-        let interval = setInterval(function(){
-            if(currentWidth > targetWidth){
-                clearInterval(interval);
-                console.log("clearinterval");
-                return;
-            }
-            currentWidth++;
-            bar.style.width = currentWidth + '%';
-        },50);
-    }
-}
-// function fillBar(bar){
-//     let currentWidth = 
+// function fillBar() {
+//     for (let bar of progressBars){
+//         let targetWidth = bar.getAttribute('data-skillValue');
+//         let currentWidth = 0 ; 
+//         let interval = setInterval(function(){
+//             if(currentWidth > targetWidth){
+//                 clearInterval(interval);
+//                 return;
+//             }
+//             currentWidth++;
+//             bar.style.width = currentWidth + '%';
+//         },50);
+//     }
 // }
+// let currentWidth = 0 ;
+function fillBar(bar , currentWidth){
+    let targetWidth = bar.getAttribute('data-skillValue');
+    // let currentWidth = 0 ;
+    currentWidth = parseInt(bar.style.width); 
+    let interval = setInterval(function(){
+        if(currentWidth >= targetWidth){
+            clearInterval(interval);
+            return ;
+        }
+        currentWidth++;
+        bar.style.width = currentWidth + '%';
+    },100);
+}
+
 function checkScroll(){
     var coordinates = skillsContainer.getBoundingClientRect();
     if(!animationDone && coordinates.top < window.innerHeight){
-        animationDone = true;
-        fillBar();
+        // animationDone = true;
+        // let coordinates;
+        for (let bar of progressBars){
+            let coordinates = bar.getBoundingClientRect();
+            if (coordinates.top < window.innerHeight){
+                fillBar(bar , parseInt(bar.style.width));
+                progressBars.unshift;
+            } 
+            if(progressBars[progressBars.length - 1].getBoundingClientRect().top < window.innerHeight){
+                animationDone = true ;
+            }
+        }
+        // animationDone = true;
     }else if ( coordinates.top > window.innerHeight){
         animationDone = false;
         initializeBars();
-    }
-    
+    } 
 }
